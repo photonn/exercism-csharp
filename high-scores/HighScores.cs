@@ -7,18 +7,18 @@ using System.Linq;
 public class HighScores
 {
 
-    List<int> lista;
+    private List<int> lista;
 
     public HighScores(List<int> list)
     {
-        this.Lista=list;
+        this.lista=list;
     }
 
-    public List<int> Scores() => this.Lista;
+    public List<int> Scores() => this.lista;
 
-    public int Latest() => Lista.Last();
+    public int Latest() => lista.Last();
 
-    public int PersonalBest() => Lista.Max();
+    public int PersonalBest() => lista.Max();
 
-    public List<int> PersonalTopThree() => Lista.OrderByDescending(i => i).Take(3).ToList();
+    public List<int> PersonalTopThree() => lista.OrderByDescending(i => i).Take(3).ToList();
 }
