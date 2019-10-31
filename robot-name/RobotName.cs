@@ -1,7 +1,9 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 public class Robot
 {
+    private static List<string> names = new List<string>();
     private string name;
     public string Name
     {
@@ -12,20 +14,21 @@ public class Robot
         private set{
             char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
             Random random = new Random(); 
-            string tempName = "";
-            for(int position=0;position<=1;position++){
-                tempName = tempName + chars[random.Next(0, chars.Length-1)].ToString().ToUpper();
-            }
-            tempName = tempName + random.Next(0,999).ToString();
-            name = tempName;
+            name = chars[random.Next(0, chars.Length-1)].ToString().ToUpper();
+            name = name + chars[random.Next(0, chars.Length-1)].ToString().ToUpper();
+            name = name + random.Next(0,999).ToString("000");
         }
     }
+
     public Robot()
     {
         Reset();
     }
     public void Reset()
     {
-        Name = "";
+        do{
+            Name = "";
+        }while(names.Contains(Name));
+        names.Add(Name);    
     }
 }
