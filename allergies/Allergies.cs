@@ -27,21 +27,33 @@ public class Allergies
         {64,Allergen.Pollen},
         {128,Allergen.Cats}
     };
+    private List<Allergen> actualAllergens = new List<Allergen>();
     public Allergies(int mask)
     {
-
+        int rest = mask;
+        actualAllergens.Add(Allergen.Pollen);
+        do{
+            foreach(KeyValuePair<int,Allergen> kvp in ValuedAlergens){
+                if (kvp.Key <= rest){
+                    rest = rest-kvp.Key;
+                    actualAllergens.Add(kvp.Value);   
+                }
+            }
+        }while(rest>0);
     }
 
     public bool IsAllergicTo(Allergen allergen)
     {
-        //throw new NotImplementedException("You need to implement this function.");
-        return true;
+        if (actualAllergens.Contains(allergen)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public Allergen[] List()
     {
-        //throw new NotImplementedException("You need to implement this function.");
-        return new Allergen[] {Allergen.Eggs};
+        return actualAllergens.ToArray();
     }
 
 }
